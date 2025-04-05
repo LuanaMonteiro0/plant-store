@@ -1,12 +1,12 @@
-import { Controller, Get } from '@nestjs/common'
-import type { PlantStoreService } from './plant-store.service'
+import { Controller, Get, HttpCode, HttpStatus } from '@nestjs/common'
 
 @Controller()
 export class PlantStoreController {
-  constructor(private readonly plantStoreService: PlantStoreService) {}
+  // biome-ignore lint/complexity/noUselessConstructor: <explanation>
+  constructor() {}
 
   @Get()
-  getHello(): string {
-    return this.plantStoreService.getHello()
+  healthCheck(): HttpStatus {
+    return HttpStatus.OK
   }
 }
