@@ -1,0 +1,25 @@
+erDiagram
+    PLANTS {
+        INT id PK "Auto incremento"
+        VARCHAR name "Não nulo"
+        VARCHAR subtitle "Não nulo"
+        FLOAT price "Não nulo"
+        INT discountPercentage "Pode ser nulo"
+        TEXT description "Não nulo"
+        TEXT features "Não nulo"
+        VARCHAR imgUrl "Pode ser nulo"
+        BOOLEAN isInSale "Padrão TRUE"
+        DATETIME createdAt "Não nulo"
+        DATETIME updatedAt "Não nulo"
+    }
+    PLANT_TYPES {
+        INT id PK "Auto incremento"
+        VARCHAR name "Não nulo"
+    }
+    PLANT_TYPE_PLANTS {
+        INT plantId PK "FK de plants(id)"
+        INT plantTypeId PK "FK de plant_types(id)"
+    }
+    
+    PLANTS ||--o{ PLANT_TYPE_PLANTS : "1:N"
+    PLANT_TYPES ||--o{ PLANT_TYPE_PLANTS : "1:N"
