@@ -3,10 +3,10 @@ import type { PlantStoreService } from './plant-store.service'
 
 @Controller()
 export class PlantStoreController {
-	constructor(private readonly plantStoreService: PlantStoreService) {}
+  constructor(private readonly plantStoreService: PlantStoreService) {}
 
-	@Get()
-	getHello(): string {
-		return this.plantStoreService.getHello()
-	}
+  @Get()
+  getHello(): string {
+    return this.plantStoreService.getHello()
+  }
 }
