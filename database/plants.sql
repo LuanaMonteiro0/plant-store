@@ -9,5 +9,13 @@ CREATE TABLE plants (
   imgUrl VARCHAR(255) DEFAULT NULL,
   isInSale BOOLEAN NOT NULL DEFAULT TRUE,
   createdAt DATETIME NOT NULL,
-  updatedAt DATETIME NOT NULL
+  updatedAt DATETIME NOT NULL,
+
+  plant_category_id INT NOT NULL,
+
+  CONSTRAINT fk_plant_category
+    FOREIGN KEY (plant_category_id)
+    REFERENCES plant_category(id)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE
 );
