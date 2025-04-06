@@ -3,6 +3,8 @@ erDiagram
   plant_category ||--o{ plant : "1 : N"
   plant ||--o{ plant_type_plant : "1 : N"
   plant_type ||--o{ plant_type_plant : "N : M"
+  user ||--o{ user_plant : "1 : N"
+  plant ||--o{ user_plant : "N : M"
 
   plant_category {
     INT id PK
@@ -32,4 +34,18 @@ erDiagram
   plant_type_plant {
     INT plantId PK, FK
     INT plantTypeId PK, FK
+  }
+
+  user {
+    INT id PK
+    VARCHAR name
+    VARCHAR email
+    VARCHAR password_hash
+    DATETIME createdAt
+    DATETIME updatedAt
+  }
+
+  user_plant {
+    INT userId PK, FK
+    INT plantId PK, FK
   }
