@@ -1,9 +1,9 @@
-CREATE TABLE plant_types (
+CREATE TABLE plant_type (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL
 );
 
-INSERT INTO plant_types (name) VALUES
+INSERT INTO plant_type (name) VALUES
   ('Árvore'),
   ('Arbusto'),
   ('Erva'),

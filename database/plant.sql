@@ -1,15 +1,15 @@
-CREATE TABLE plants (
+CREATE TABLE plant (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   subtitle VARCHAR(255) NOT NULL,
   price FLOAT NOT NULL,
-  discountPercentage INT DEFAULT NULL,
+  discount_percentage INT DEFAULT NULL,
   description TEXT NOT NULL,
   features TEXT NOT NULL,
-  imgUrl VARCHAR(255) DEFAULT NULL,
-  isInSale BOOLEAN NOT NULL DEFAULT TRUE,
-  createdAt DATETIME NOT NULL,
-  updatedAt DATETIME NOT NULL,
+  img_url VARCHAR(255) DEFAULT NULL,
+  is_in_sale BOOLEAN NOT NULL DEFAULT TRUE,
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL,
 
   plant_category_id INT NOT NULL,
 
