@@ -1,6 +1,9 @@
-# 📘 Especificação do Banco de Dados
 
-## 🪴 Tabela `plant_category`
+# Especificação Atualizada do Banco de Dados
+
+---
+
+## Tabela `plant_category`
 
 Armazena as categorias principais das plantas (ex: Medicinal, Ornamental, etc.)
 
@@ -11,7 +14,7 @@ Armazena as categorias principais das plantas (ex: Medicinal, Ornamental, etc.)
 
 ---
 
-## 🌿 Tabela `plant_type`
+## Tabela `plant_type`
 
 Representa os tipos morfológicos das plantas (ex: Arbusto, Árvore, Erva, etc.)
 
@@ -22,7 +25,7 @@ Representa os tipos morfológicos das plantas (ex: Arbusto, Árvore, Erva, etc.)
 
 ---
 
-## 🌱 Tabela `plant`
+## Tabela `plant`
 
 Armazena as informações principais das plantas cadastradas.
 
@@ -37,13 +40,13 @@ Armazena as informações principais das plantas cadastradas.
 | `features`           | TEXT         | Características da planta (pode ser JSON ou texto estruturado) | "Altura: até 60cm; Luz: Pleno sol"           |
 | `imgUrl`             | VARCHAR(255) | URL da imagem representativa                                   | "https://meusite.com/img/camomila.jpg"       |
 | `isInSale`           | BOOLEAN      | Indica se está em promoção                                     | true                                         |
-| `createdAt`          | DATETIME     | Data de criação do registro                                    | "2024-04-05 14:23:00"                        |
-| `updatedAt`          | DATETIME     | Última atualização                                             | "2024-04-10 09:12:45"                        |
-| `plant_category_id`  | INT (FK)     | Referência à categoria da planta                               | 1                                            |
+| `createdAt`          | DATETIME     | Data de criação do registro                                    | "2024-04-05 14:23:00"                         |
+| `updatedAt`          | DATETIME     | Última atualização                                             | "2024-04-10 09:12:45"                         |
+| `plant_category_id`  | INT (FK)     | Referência à categoria da planta                               | 1                                             |
 
 ---
 
-## 🔗 Tabela `plant_type_plant`
+## Tabela `plant_type_plant`
 
 Tabela de associação N:M entre `plant` e `plant_type`.
 
@@ -54,7 +57,7 @@ Tabela de associação N:M entre `plant` e `plant_type`.
 
 ---
 
-## 👤 Tabela `user`
+## Tabela `user`
 
 Tabela de usuários do sistema (admin, comprador, etc.)
 
@@ -69,7 +72,7 @@ Tabela de usuários do sistema (admin, comprador, etc.)
 
 ---
 
-## 🤝 Tabela `user_plant`
+## Tabela `user_plant`
 
 Relaciona usuários às plantas (ex: plantas compradas, favoritas, etc.)
 
@@ -77,3 +80,29 @@ Relaciona usuários às plantas (ex: plantas compradas, favoritas, etc.)
 | --------- | ------------ | ------------- | ------- |
 | `userId`  | INT (PK, FK) | ID do usuário | 501     |
 | `plantId` | INT (PK, FK) | ID da planta  | 101     |
+
+---
+
+## Tabela `Order`
+
+Registra pedidos feitos por usuários contendo uma planta por pedido.
+
+| Coluna       | Tipo         | Descrição                         | Exemplo                  |
+| ------------ | ------------ | --------------------------------- | ------------------------ |
+| `id`         | INT (PK)     | Identificador único do pedido     | 2023                     |
+| `user_id`    | INT (FK)     | ID do usuário que realizou o pedido | 501                    |
+| `plant_id`   | INT (FK)     | ID da planta adquirida            | 101                      |
+| `description`| TEXT         | Observações ou mensagem do pedido | "Para presente"          |
+| `created_at` | DATETIME     | Quando o pedido foi criado        | "2024-04-10 13:00:00"    |
+| `updated_at` | DATETIME     | Última atualização do pedido      | "2024-04-10 14:30:00"    |
+
+---
+
+## Tabela `user_plant_management`
+
+Relaciona usuários com plantas que eles gerenciam (ex: admin pode editar cadastro de certas plantas). Representa uma relação N:M.
+
+| Coluna    | Tipo         | Descrição                    | Exemplo |
+| --------- | ------------ | ---------------------------- | ------- |
+| `userId`  | INT (PK, FK) | ID do usuário que gerencia   | 2       |
+| `plantId` | INT (PK, FK) | ID da planta gerenciada      | 50      |

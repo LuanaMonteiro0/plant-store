@@ -3,11 +3,17 @@ classDiagram
 class PlantCategory {
   +int id
   +string name
+
+  +getCategoryById(id)
+  +listAll()
 }
 
 class PlantType {
   +int id
   +string name
+
+  +getTypeById(id)
+  +listAll()
 }
 
 class Plant {
@@ -23,11 +29,13 @@ class Plant {
   +datetime createdAt
   +datetime updatedAt
   +int plantCategoryId
-}
 
-class PlantTypePlant {
-  +int plantId
-  +int plantTypeId
+  +createPlant()
+  +getPlantById(id)
+  +updatePlant(id, data)
+  +deletePlant(id)
+  +listAll()
+  +listAllByUserId(userId)
 }
 
 class User {
@@ -37,6 +45,32 @@ class User {
   +string password_hash
   +datetime createdAt
   +datetime updatedAt
+
+  +createUser()
+  +getUserById(id)
+  +updateUser(id, data)
+  +deleteUser(id)
+  +listAll()
+}
+
+class Order {
+  +int id
+  +int user_id
+  +int plant_id
+  +string description
+  +datetime created_at
+  +datetime updated_at
+
+  +createOrder()
+  +getOrderById(id)
+  +updateOrder(id, data)
+  +deleteOrder(id)
+  +listAllByUserId(userId)
+}
+
+class PlantTypePlant {
+  +int plantId
+  +int plantTypeId
 }
 
 class UserPlant {
@@ -44,8 +78,12 @@ class UserPlant {
   +int plantId
 }
 
-PlantCategory "1" --> "many" Plant : categoriza
-Plant "1" --> "many" PlantTypePlant : está em
-PlantType "1" --> "many" PlantTypePlant : define
-User "1" --> "many" UserPlant : possui
-Plant "1" --> "many" UserPlant : relacionado a
+PlantCategory "1" --> "m" Plant : categoriza
+Plant "1" --> "m" PlantTypePlant : está em
+PlantType "1" --> "m" PlantTypePlant : define
+
+User "1" --> "m" UserPlant : possui
+Plant "1" --> "m" UserPlant : relacionado a
+
+User "1" --> "m" Order : realiza
+Plant "1" --> "m" Order : vendido em
