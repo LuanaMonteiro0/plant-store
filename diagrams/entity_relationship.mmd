@@ -5,6 +5,8 @@ erDiagram
   plant_type ||--o{ plant_type_plant : "N : M"
   user ||--o{ user_plant : "1 : N"
   plant ||--o{ user_plant : "N : M"
+  user ||--o{ Order : "1 : N"
+  plant ||--o{ Order : "1 : N"
 
   plant_category {
     INT id PK
@@ -48,4 +50,13 @@ erDiagram
   user_plant {
     INT userId PK, FK
     INT plantId PK, FK
+  }
+
+  Order {
+    INT id PK
+    INT user_id FK
+    INT plant_id FK
+    TEXT description
+    DATETIME created_at
+    DATETIME updated_at
   }
