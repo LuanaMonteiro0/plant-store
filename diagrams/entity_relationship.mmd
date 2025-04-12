@@ -1,0 +1,51 @@
+erDiagram
+
+  plant_category ||--o{ plant : "1 : N"
+  plant ||--o{ plant_type_plant : "1 : N"
+  plant_type ||--o{ plant_type_plant : "N : M"
+  user ||--o{ user_plant : "1 : N"
+  plant ||--o{ user_plant : "N : M"
+
+  plant_category {
+    INT id PK
+    VARCHAR name
+  }
+
+  plant_type {
+    INT id PK
+    VARCHAR name
+  }
+
+  plant {
+    INT id PK
+    VARCHAR name
+    VARCHAR subtitle
+    FLOAT price
+    INT discountPercentage
+    TEXT description
+    TEXT features
+    VARCHAR imgUrl
+    BOOLEAN isInSale
+    DATETIME createdAt
+    DATETIME updatedAt
+    INT plant_category_id FK
+  }
+
+  plant_type_plant {
+    INT plantId PK, FK
+    INT plantTypeId PK, FK
+  }
+
+  user {
+    INT id PK
+    VARCHAR name
+    VARCHAR email
+    VARCHAR password_hash
+    DATETIME createdAt
+    DATETIME updatedAt
+  }
+
+  user_plant {
+    INT userId PK, FK
+    INT plantId PK, FK
+  }
