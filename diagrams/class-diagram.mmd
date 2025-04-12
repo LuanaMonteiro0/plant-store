@@ -1,0 +1,51 @@
+classDiagram
+
+class PlantCategory {
+  +int id
+  +string name
+}
+
+class PlantType {
+  +int id
+  +string name
+}
+
+class Plant {
+  +int id
+  +string name
+  +string subtitle
+  +float price
+  +int discountPercentage
+  +string description
+  +string features
+  +string imgUrl
+  +bool isInSale
+  +datetime createdAt
+  +datetime updatedAt
+  +int plantCategoryId
+}
+
+class PlantTypePlant {
+  +int plantId
+  +int plantTypeId
+}
+
+class User {
+  +int id
+  +string name
+  +string email
+  +string password_hash
+  +datetime createdAt
+  +datetime updatedAt
+}
+
+class UserPlant {
+  +int userId
+  +int plantId
+}
+
+PlantCategory "1" --> "many" Plant : categoriza
+Plant "1" --> "many" PlantTypePlant : está em
+PlantType "1" --> "many" PlantTypePlant : define
+User "1" --> "many" UserPlant : possui
+Plant "1" --> "many" UserPlant : relacionado a
