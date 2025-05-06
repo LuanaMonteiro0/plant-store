@@ -12,17 +12,13 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/apps/plant-store/main",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./apps/plant-store/test/jest-e2e.json"
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.1",
+    "pg": "^8.15.6",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"
   },
@@ -75,7 +71,7 @@
       "<rootDir>/apps/"
     ],
     "moduleNameMapper": {
-      "^@core/db-conn(|/.*)$": "<rootDir>/libs/db-conn/src/$1",
+      "^@core/tunnelCat(|/.*)$": "<rootDir>/libs/tunnel-cat/src/$1",
       "^@core/msvc-conn(|/.*)$": "<rootDir>/libs/msvc-conn/src/$1"
     }
   }

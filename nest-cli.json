@@ -8,13 +8,13 @@
     "tsConfigPath": "apps/plant-store/tsconfig.app.json"
   },
   "projects": {
-    "db-conn": {
+    "tunnel-cat": {
       "type": "library",
-      "root": "libs/db-conn",
+      "root": "libs/tunnel-cat",
       "entryFile": "index",
-      "sourceRoot": "libs/db-conn/src",
+      "sourceRoot": "libs/tunnel-cat/src",
       "compilerOptions": {
-        "tsConfigPath": "libs/db-conn/tsconfig.lib.json"
+        "tsConfigPath": "libs/tunnel-cat/tsconfig.lib.json"
       }
     },
     "microservices": {
@@ -33,15 +33,6 @@
       "sourceRoot": "libs/msvc-conn/src",
       "compilerOptions": {
         "tsConfigPath": "libs/msvc-conn/tsconfig.lib.json"
-      }
-    },
-    "plant-marketplace": {
-      "type": "application",
-      "root": "apps/plant-marketplace",
-      "entryFile": "main",
-      "sourceRoot": "apps/plant-marketplace/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/plant-marketplace/tsconfig.app.json"
       }
     },
     "plant-store": {

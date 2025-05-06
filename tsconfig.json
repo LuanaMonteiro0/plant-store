@@ -18,11 +18,11 @@
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@core/db-conn": [
-        "libs/db-conn/src"
+      "@core/tunnelCat": [
+        "libs/tunnel-cat/src"
       ],
-      "@core/db-conn/*": [
-        "libs/db-conn/src/*"
+      "@core/tunnelCat/*": [
+        "libs/tunnel-cat/src/*"
       ],
       "@core/msvc-conn": [
         "libs/msvc-conn/src"
