@@ -1,8 +1,59 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "src",
+  "sourceRoot": "apps/plant-store/src",
   "compilerOptions": {
-    "deleteOutDir": true
-  }
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/plant-store/tsconfig.app.json"
+  },
+  "projects": {
+    "db-conn": {
+      "type": "library",
+      "root": "libs/db-conn",
+      "entryFile": "index",
+      "sourceRoot": "libs/db-conn/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/db-conn/tsconfig.lib.json"
+      }
+    },
+    "microservices": {
+      "type": "application",
+      "root": "apps/microservices",
+      "entryFile": "main",
+      "sourceRoot": "apps/microservices/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/microservices/tsconfig.app.json"
+      }
+    },
+    "msvc-conn": {
+      "type": "library",
+      "root": "libs/msvc-conn",
+      "entryFile": "index",
+      "sourceRoot": "libs/msvc-conn/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/msvc-conn/tsconfig.lib.json"
+      }
+    },
+    "plant-marketplace": {
+      "type": "application",
+      "root": "apps/plant-marketplace",
+      "entryFile": "main",
+      "sourceRoot": "apps/plant-marketplace/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/plant-marketplace/tsconfig.app.json"
+      }
+    },
+    "plant-store": {
+      "type": "application",
+      "root": "apps/plant-store",
+      "entryFile": "main",
+      "sourceRoot": "apps/plant-store/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/plant-store/tsconfig.app.json"
+      }
+    }
+  },
+  "monorepo": true,
+  "root": "apps/plant-store"
 }

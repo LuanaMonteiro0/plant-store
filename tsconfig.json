@@ -16,6 +16,20 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": false,
     "strictBindCallApply": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@core/db-conn": [
+        "libs/db-conn/src"
+      ],
+      "@core/db-conn/*": [
+        "libs/db-conn/src/*"
+      ],
+      "@core/msvc-conn": [
+        "libs/msvc-conn/src"
+      ],
+      "@core/msvc-conn/*": [
+        "libs/msvc-conn/src/*"
+      ]
+    }
   }
 }
