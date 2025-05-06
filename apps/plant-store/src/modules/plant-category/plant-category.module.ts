@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common'
 import { PlantCategoryController } from './plant-category.controller'
+import { TunnelCatModule } from '@core/tunnelCat'
 
 @Module({
-    imports: [],
-    controllers: [PlantCategoryController],
-    providers: [],
+  imports: [TunnelCatModule],
+  controllers: [PlantCategoryController],
+  providers: [],
 })
-export class PlantCategoryModule { }
+export class PlantCategoryModule {}

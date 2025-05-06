@@ -1,6 +1,8 @@
 import { Pool } from 'pg'
 import { TunnelCatClient } from './tunnel-cat.controller'
+import { Injectable } from '@nestjs/common'
 
+@Injectable()
 export class TunnelCatFactory {
   private readonly pool: Pool
 

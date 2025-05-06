@@ -1,9 +1,9 @@
+import { TunnelCatFactory } from '@core/tunnelCat/tunnel-cat.factory'
 import { Controller, Get, HttpCode, HttpStatus } from '@nestjs/common'
 
 @Controller()
 export class PlantStoreController {
-  // biome-ignore lint/complexity/noUselessConstructor: <explanation>
-  constructor() {}
+  constructor(private readonly tunnelCat: TunnelCatFactory) {}
 
   @Get()
   healthCheck(): HttpStatus {
