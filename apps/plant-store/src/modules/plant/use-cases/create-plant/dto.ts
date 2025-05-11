@@ -12,7 +12,7 @@ import {
 } from 'class-validator'
 import { Type } from 'class-transformer'
 
-export class createPlantDTO {
+export class CreatePlantDTO {
   @IsString()
   @IsNotEmpty()
   name: string
