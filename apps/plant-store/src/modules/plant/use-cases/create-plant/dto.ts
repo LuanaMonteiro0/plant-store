@@ -1,3 +1,3 @@
-export class createPlantDTO {
-    
+export class CreatePlantDTO {
+
 }
