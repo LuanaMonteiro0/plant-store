@@ -29,7 +29,7 @@ export class CreatePlantDTO {
   @IsInt()
   @Min(0)
   @Max(100)
-  discount_percentage?: number
+  discountPercentage?: number
 
   @IsString()
   @IsNotEmpty()
@@ -44,13 +44,5 @@ export class CreatePlantDTO {
   img_url?: string
 
   @IsBoolean()
-  is_in_sale: boolean
-
-  @Type(() => Date)
-  @IsDate()
-  created_at: Date
-
-  @Type(() => Date)
-  @IsDate()
-  updated_at: Date
+  isInSale: boolean
 }
