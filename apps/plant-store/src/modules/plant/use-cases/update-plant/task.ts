@@ -1,12 +1,13 @@
 import { TunnelCatClient } from '@core/tunnelCat'
 import { UpdatePlantDTO } from './dto'
+import { Plant } from './types'
 
 interface updatePlantParams extends UpdatePlantDTO {}
 
 export async function updatePlant(
   client: TunnelCatClient,
   params: updatePlantParams,
-) {
+): Promise<Plant> {
   try {
     client.startTransaction()
 
@@ -20,7 +21,7 @@ export async function updatePlant(
         features = $features, 
         img_url = $imgUrl,
         is_in_sale = $isInSale
-     WHERE id=$id
+     WHERE id=$id RETURNING id
     `
 
     const values = {
@@ -35,11 +36,14 @@ export async function updatePlant(
       isInSale: params.isInSale,
     }
 
-    await client.query({ query, values })
-
+    const response = await client.query<Plant>({ query, values })
+    const updatedPlant = response[0]
     client.commitTransaction()
+
+    return updatedPlant
   } catch (err) {
     console.log(err)
     client.rollbackTransaction()
+    return err
   }
 }
