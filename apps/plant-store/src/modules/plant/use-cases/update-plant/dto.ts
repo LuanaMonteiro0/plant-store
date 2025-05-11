@@ -1,6 +1,20 @@
-import { IsBoolean, IsInt, IsNotEmpty, IsNumber, IsOptional, IsPositive, IsString, Max, Min } from 'class-validator'
+import {
+  IsBoolean,
+  IsInt,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsPositive,
+  IsString,
+  Max,
+  Min,
+} from 'class-validator'
 
 export class UpdatePlantDTO {
+  @IsNumber()
+  @IsNotEmpty()
+  id: number
+
   @IsString()
   @IsNotEmpty()
   name: string
@@ -17,7 +31,7 @@ export class UpdatePlantDTO {
   @IsInt()
   @Min(0)
   @Max(100)
-  discount_percentage?: number
+  discountPercentage?: number
 
   @IsString()
   @IsNotEmpty()
@@ -29,8 +43,8 @@ export class UpdatePlantDTO {
 
   @IsOptional()
   @IsString()
-  img_url?: string
+  imgUrl?: string
 
   @IsBoolean()
-  is_in_sale: boolean
+  isInSale: boolean
 }
