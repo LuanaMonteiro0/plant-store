@@ -3,14 +3,34 @@ import { CreatePlantDTO } from './dto'
 
 interface createPlantParams extends CreatePlantDTO {}
 
-export function createPlant(
+export async function createPlant(
   client: TunnelCatClient,
   params: createPlantParams,
 ) {
   try {
     client.startTransaction()
 
-    const query = 'asas'
+    const query = `
+    INSERT INTO plant(
+    name,
+    subtitle,
+    price,
+    discount_percentage,
+    description,
+    features,
+    img_url,
+    is_in_sale
+    ) VALUES(
+     $name,
+     $subtitle,
+     $price,
+     $discountPercentage,
+     $description,
+     $features,
+     $imgUrl,
+     $isInSale
+    )
+    `
 
     const values = {
       name: params.name,
@@ -23,10 +43,11 @@ export function createPlant(
       isInSale: params.isInSale,
     }
 
-    client.query({ query, values })
+    await client.query({ query, values })
 
     client.commitTransaction()
   } catch (err) {
     console.log(err)
+    client.rollbackTransaction()
   }
 }
