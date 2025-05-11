@@ -2,11 +2,11 @@ import { TunnelCatClient } from '@core/tunnelCat'
 import { GetPlantCategoryDTO } from './dto'
 import { PlantCategory } from './types'
 
-interface getPlantCategoryParams extends GetPlantCategoryDTO {}
+interface GetPlantCategoryParams extends GetPlantCategoryDTO {}
 
 export async function getPlantCategory(
   client: TunnelCatClient,
-  params: getPlantCategoryParams,
+  params: GetPlantCategoryParams,
 ): Promise<PlantCategory> {
   try {
     const query = `
