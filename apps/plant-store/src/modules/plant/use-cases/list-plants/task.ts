@@ -1,12 +1,13 @@
 import { TunnelCatClient } from '@core/tunnelCat'
+import { Plant } from './types'
 // import { ListPlantsDTO } from './dto'
 
 // interface listPlantParams extends ListPlantsDTO {}
 
-export async function listPlant(
+export async function listPlants(
   client: TunnelCatClient,
   //   params: listPlantParams,
-) {
+): Promise<Array<Plant>> {
   try {
     const query = `
     SELECT 
@@ -21,8 +22,10 @@ export async function listPlant(
         is_in_sale AS isInSale
      FROM plant
     `
-    await client.query({ query })
+    const response = await client.query<Plant>({ query })
+    return response
   } catch (err) {
     console.log(err)
+    return err
   }
 }
