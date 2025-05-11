@@ -1,5 +1,5 @@
 import { TunnelCatFactory } from '@core/tunnelCat/tunnel-cat.factory'
-import { Controller, Get, HttpCode, HttpStatus } from '@nestjs/common'
+import { Controller, Get, HttpStatus } from '@nestjs/common'
 
 @Controller()
 export class PlantStoreController {

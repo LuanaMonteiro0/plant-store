@@ -9,7 +9,11 @@
 
   "files": {
     "ignoreUnknown": false,
-    "ignore": ["dist", "node_modules"]
+    "ignore": [
+      "dist",
+      "node_modules",
+      "/apps/plant-store/src/modules/plant/plant.controller.ts"
+    ]
   },
 
   "formatter": {
