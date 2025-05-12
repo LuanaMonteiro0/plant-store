@@ -4,7 +4,7 @@ import { Controller, Get, Param } from '@nestjs/common'
 import { listPlantCategory } from './use-cases/list-plant-category'
 import { getPlantCategory, GetPlantCategoryDTO } from './use-cases/get-plant-category'
 
-@Controller()
+@Controller('plant-category')
 export class PlantCategoryController {
   constructor(private readonly tunnelCat: TunnelCatFactory) {}
 

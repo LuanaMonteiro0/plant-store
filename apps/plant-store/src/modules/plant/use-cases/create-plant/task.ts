@@ -20,7 +20,9 @@ export async function createPlant(
     description,
     features,
     img_url,
-    is_in_sale
+    is_in_sale,
+    created_at,
+    updated_at
     ) VALUES(
      $name,
      $subtitle,
@@ -29,7 +31,9 @@ export async function createPlant(
      $description,
      $features,
      $imgUrl,
-     $isInSale
+     $isInSale,
+     NOW(),
+     NOW()
     ) RETURNING id
     `
 
