@@ -1,6 +1,7 @@
 import { TunnelCatClient } from '@core/tunnelCat'
 import { CreatePlantDTO } from './dto'
-import { Plant } from './types'
+import { Plant, PlantCategory } from './types'
+import { error } from 'console'
 
 interface createPlantParams extends CreatePlantDTO {}
 
@@ -11,7 +12,24 @@ export async function createPlant(
   try {
     client.startTransaction()
 
-    const query = `
+    const firstQuery =
+      'SELECT id FROM plant_category WHERE id = $plantCategoryId'
+
+    const firstQueryValues = {
+      plantCategoryId: params.plantCategoryId,
+    }
+
+    const firstResponse = await client.query<PlantCategory>({
+      query: firstQuery,
+      values: firstQueryValues,
+    })
+    const plantCategory = firstResponse[0]
+
+    if (!plantCategory) {
+      throw new error('Plant Category does not exist.')
+    }
+
+    const secondQuery = `
     INSERT INTO plant(
     name,
     subtitle,
@@ -37,7 +55,7 @@ export async function createPlant(
     ) RETURNING id
     `
 
-    const values = {
+    const secondQueryValues = {
       name: params.name,
       subtitle: params.subtitle,
       price: params.price,
@@ -48,7 +66,10 @@ export async function createPlant(
       isInSale: params.isInSale,
     }
 
-    const response = await client.query<Plant>({ query, values })
+    const response = await client.query<Plant>({
+      query: secondQuery,
+      values: secondQueryValues,
+    })
     const plant = response[0]
 
     client.commitTransaction()

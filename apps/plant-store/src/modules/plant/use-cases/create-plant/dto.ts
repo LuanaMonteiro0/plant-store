@@ -45,4 +45,8 @@ export class CreatePlantDTO {
 
   @IsBoolean()
   isInSale: boolean
+
+  @IsNumber()
+  @IsNotEmpty()
+  plantCategoryId: number
 }
