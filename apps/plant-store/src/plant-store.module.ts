@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common'
 import { TunnelCatModule } from '@core/tunnelCat'
 
-import { PlantStoreController } from './plant-store.controller'
 import { PlantModule } from './modules/plant/plant.module'
 
+import { PlantStoreController } from './plant-store.controller'
+import { PlantCategoryController } from './modules/plant-category/plant-category.controller'
+
 @Module({
-  imports: [TunnelCatModule, PlantModule],
+  imports: [TunnelCatModule, PlantModule, PlantCategoryController],
   controllers: [PlantStoreController],
   providers: [],
 })
