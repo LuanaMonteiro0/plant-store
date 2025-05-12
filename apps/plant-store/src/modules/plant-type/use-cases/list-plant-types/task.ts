@@ -4,7 +4,7 @@ import { PlantType } from './types'
 
 // interface ListPlantTypeParams extends ListPlantTypeDTO {}
 
-export async function listPlantType(
+export async function listPlantTypes(
   client: TunnelCatClient,
   //   params: ListPlantTypeParams,
 ): Promise<Array<PlantType>> {

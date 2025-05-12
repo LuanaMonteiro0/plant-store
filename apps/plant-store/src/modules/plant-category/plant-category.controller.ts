@@ -9,7 +9,7 @@ export class PlantCategoryController {
   constructor(private readonly tunnelCat: TunnelCatFactory) {}
 
   @Get('/')
-  async listPlants() {
+  async listPlantCategory() {
     const client = await this.tunnelCat.connect()
 
     try {
@@ -23,7 +23,7 @@ export class PlantCategoryController {
   }
 
   @Get('/:id')
-  async getPlant(@Param() param: GetPlantCategoryDTO) {
+  async getPlantCategory(@Param() param: GetPlantCategoryDTO) {
     const client = await this.tunnelCat.connect()
 
     try {

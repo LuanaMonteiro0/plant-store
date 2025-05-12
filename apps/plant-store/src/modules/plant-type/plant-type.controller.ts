@@ -1,17 +1,19 @@
 import { TunnelCatFactory } from '@core/tunnelCat/tunnel-cat.factory'
 import { Controller, Get, Param } from '@nestjs/common'
+
 import { getPlantType, GetPlantTypeDTO } from './use-cases/get-plant-type'
+import { listPlantTypes } from './use-cases/list-plant-types'
 
 @Controller()
 export class PlantTypeController {
   constructor(private readonly tunnelCat: TunnelCatFactory) {}
 
     @Get('/')
-    async listPlants() {
+    async listPlantTypes() {
       const client = await this.tunnelCat.connect()
   
       try {
-        //const response = await listPlantTypes(client)
+        const response = await listPlantTypes(client)
   
         return response
       } catch (err) {
@@ -21,7 +23,7 @@ export class PlantTypeController {
     }
   
     @Get('/:id')
-    async getPlant(@Param() param: GetPlantTypeDTO) {
+    async getPlantType(@Param() param: GetPlantTypeDTO) {
       const client = await this.tunnelCat.connect()
   
       try {
