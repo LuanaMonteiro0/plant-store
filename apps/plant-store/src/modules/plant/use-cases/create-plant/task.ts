@@ -13,7 +13,7 @@ export async function createPlant(
 
     console.log(params)
 
-    const plantTypeQuery = `SELECT COUNT(*)::int FROM plant_type WHERE id = ANY($plantTypesIds)`
+    const plantTypeQuery = `SELECT COUNT(*)::int FROM plant_type WHERE id = ANY ($plantTypesIds)`
 
     const plantTypesQueryValues = {
       plantTypesIds: params.plantTypesIds,
@@ -41,6 +41,7 @@ export async function createPlant(
       query: plantCategoryQuery,
       values: plantCategoryQueryValues,
     })
+
     const plantCategory = firstResponse[0]
 
     if (!plantCategory) {
