@@ -13,16 +13,33 @@ export async function createPlant(
 
     console.log(params)
 
-    const firstQuery =
+    const plantTypeQuery = `SELECT COUNT(*)::int FROM plant_type WHERE id = ANY($plantTypesIds)`
+
+    const plantTypesQueryValues = {
+      plantTypesIds: params.plantTypesIds,
+    }
+
+    const result = await client.query<{ count: number }>({
+      query: plantTypeQuery,
+      values: plantTypesQueryValues,
+    })
+
+    const allExist = result[0].count === params.plantTypesIds.length
+
+    if (!allExist) {
+      throw new Error('Not all types present in DB')
+    }
+
+    const plantCategoryQuery =
       'SELECT id FROM plant_category WHERE id = $plantCategoryId'
 
-    const firstQueryValues = {
+    const plantCategoryQueryValues = {
       plantCategoryId: params.plantCategoryId,
     }
 
     const firstResponse = await client.query<PlantCategory>({
-      query: firstQuery,
-      values: firstQueryValues,
+      query: plantCategoryQuery,
+      values: plantCategoryQueryValues,
     })
     const plantCategory = firstResponse[0]
 
@@ -30,7 +47,7 @@ export async function createPlant(
       throw new Error('Plant Category does not exist.')
     }
 
-    const secondQuery = `
+    const insertionQuery = `
     INSERT INTO plant(
     name,
     subtitle,
@@ -58,7 +75,7 @@ export async function createPlant(
     ) RETURNING id
     `
 
-    const secondQueryValues = {
+    const insertionQueryValues = {
       name: params.name,
       subtitle: params.subtitle,
       price: params.price,
@@ -71,10 +88,25 @@ export async function createPlant(
     }
 
     const response = await client.query<Plant>({
-      query: secondQuery,
-      values: secondQueryValues,
+      query: insertionQuery,
+      values: insertionQueryValues,
     })
     const plant = response[0]
+
+    for (const plantTypeId of params.plantTypesIds) {
+      const plantTypePlantQuery =
+        'INSERT INTO plant_type_plant(plant_id, plant_type_id) VALUES($plantId, $plantTypeId)'
+
+      const plantTypePlantQueryValues = {
+        plantId: plant.id,
+        plantTypeId,
+      }
+
+      await client.query({
+        query: plantTypePlantQuery,
+        values: plantTypePlantQueryValues,
+      })
+    }
 
     client.commitTransaction()
 

@@ -10,8 +10,10 @@ import {
   Min,
   Max,
   isPositive,
+  IsArray,
 } from 'class-validator'
 import { Type } from 'class-transformer'
+import { PlantType } from '../../../plant-type/use-cases/get-plant-type/types'
 
 export class CreatePlantDTO {
   @IsString()
@@ -50,4 +52,8 @@ export class CreatePlantDTO {
   @IsNumber()
   @IsNotEmpty()
   plantCategoryId: number
+
+  @IsArray()
+  @IsNotEmpty()
+  plantTypesIds: Array<number>
 }
