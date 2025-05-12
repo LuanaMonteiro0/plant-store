@@ -5,15 +5,10 @@ import { PlantModule } from './modules/plant/plant.module'
 
 import { PlantStoreController } from './plant-store.controller'
 import { PlantTypeModule } from './modules/plant-type/plant-type.module'
-import { PlantCategoryController } from './modules/plant-category/plant-category.controller'
+import { PlantCategoryModule } from './modules/plant-category/plant-category.module'
 
 @Module({
-  imports: [
-    TunnelCatModule,
-    PlantModule,
-    PlantCategoryController,
-    PlantTypeModule,
-  ],
+  imports: [TunnelCatModule, PlantModule, PlantCategoryModule, PlantTypeModule],
   controllers: [PlantStoreController],
   providers: [],
 })

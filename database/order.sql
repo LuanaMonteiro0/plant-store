@@ -1,8 +1,11 @@
-CREATE TABLE order (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    description VARCHAR(255) NOT NULL,
-    user_id INT FOREIGN KEY user(id),
-    plant_id INT FOREIGN KEY plant(id),
-    createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+CREATE TABLE "order" (
+  id SERIAL PRIMARY KEY,
+  description VARCHAR(255) NOT NULL,
+  user_id INT NOT NULL,
+  plant_id INT NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL,
+  updated_at TIMESTAMPTZ NOT NULL,
+  CONSTRAINT fk_order_user FOREIGN KEY (user_id) REFERENCES "user"(id),
+  CONSTRAINT fk_order_plant FOREIGN KEY (plant_id) REFERENCES plant(id)
 );
+
