@@ -19,6 +19,7 @@ export class PlantCategoryController {
     } catch (err) {
       throw err
     } finally {
+      await client.release() 
     }
   }
 
@@ -33,7 +34,7 @@ export class PlantCategoryController {
     } catch (err) {
       throw err
     } finally {
-      client.release()
+      await client.release()
     }
   }
 }

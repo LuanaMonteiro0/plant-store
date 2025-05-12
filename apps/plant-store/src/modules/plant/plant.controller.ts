@@ -22,6 +22,7 @@ export class PlantController {
     } catch (err) {
       throw err
     } finally {
+      await client.release() 
     }
   }
 
@@ -29,6 +30,7 @@ export class PlantController {
   async createPlant(@Body() body: CreatePlantDTO) {
     const client = await this.tunnelCat.connect()
 
+    console.log('here')
     try {
       const response = await createPlant(client, {...body})
 
@@ -36,7 +38,7 @@ export class PlantController {
     } catch (err) {
       throw err
     } finally {
-      client.release()
+      await client.release()
     }
   }
 
@@ -51,7 +53,7 @@ export class PlantController {
     } catch (err) {
       throw err
     } finally {
-      client.release()
+      await client.release()
     }
   }
 
@@ -66,7 +68,7 @@ export class PlantController {
     } catch (err) {
       throw err
     } finally {
-      client.release()
+      await client.release()
     }
   }
 
@@ -81,7 +83,7 @@ export class PlantController {
     } catch (err) {
       throw err
     } finally {
-      client.release()
+      await client.release()
     }
   }
 }

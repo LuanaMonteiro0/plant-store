@@ -1,7 +1,6 @@
 import { TunnelCatClient } from '@core/tunnelCat'
 import { CreatePlantDTO } from './dto'
 import { Plant, PlantCategory } from './types'
-import { error } from 'console'
 
 interface createPlantParams extends CreatePlantDTO {}
 
@@ -11,6 +10,8 @@ export async function createPlant(
 ): Promise<Plant> {
   try {
     client.startTransaction()
+
+    console.log(params)
 
     const firstQuery =
       'SELECT id FROM plant_category WHERE id = $plantCategoryId'
@@ -26,7 +27,7 @@ export async function createPlant(
     const plantCategory = firstResponse[0]
 
     if (!plantCategory) {
-      throw new error('Plant Category does not exist.')
+      throw new Error('Plant Category does not exist.')
     }
 
     const secondQuery = `
@@ -40,7 +41,8 @@ export async function createPlant(
     img_url,
     is_in_sale,
     created_at,
-    updated_at
+    updated_at, 
+    plant_category_id
     ) VALUES(
      $name,
      $subtitle,
@@ -51,7 +53,8 @@ export async function createPlant(
      $imgUrl,
      $isInSale,
      NOW(),
-     NOW()
+     NOW(),
+     $plantCategoryId
     ) RETURNING id
     `
 
@@ -64,6 +67,7 @@ export async function createPlant(
       features: params.features,
       imgUrl: params.imgUrl,
       isInSale: params.isInSale,
+      plantCategoryId: params.plantCategoryId,
     }
 
     const response = await client.query<Plant>({
