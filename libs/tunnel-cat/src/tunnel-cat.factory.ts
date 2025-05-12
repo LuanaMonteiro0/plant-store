@@ -21,15 +21,6 @@ export class TunnelCatFactory {
   async connect(): Promise<TunnelCatClient> {
     dotenv.config()
 
-    console.log('PG Config:', {
-      host: process.env.PG_HOST,
-      port: process.env.PG_PORT,
-      user: process.env.PG_USER,
-      password: process.env.PG_PASSWORD?.toString(),
-      database: process.env.PG_DATABASE,
-      typeOfPassword: typeof process.env.PG_PASSWORD,
-    })
-
     const pgClient = await this.pool.connect()
     return new TunnelCatClient(pgClient)
   }
