@@ -80,7 +80,7 @@ export async function createPlant(
      $discountPercentage,
      $description,
      $features,
-     $imgUrl,
+     $imgurl,
      $isInSale,
      NOW(),
      NOW(),
@@ -95,7 +95,7 @@ export async function createPlant(
       discountPercentage: params.discountPercentage,
       description: params.description,
       features: params.features,
-      imgUrl: params.imgUrl,
+      imgurl: params.imgurl,
       isInSale: params.isInSale,
       plantCategoryId: params.plantCategoryId,
     }

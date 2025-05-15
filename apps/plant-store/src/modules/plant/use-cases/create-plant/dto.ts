@@ -44,7 +44,7 @@ export class CreatePlantDTO {
 
   @IsOptional()
   @IsString()
-  imgUrl?: string
+  imgurl?: string
 
   @IsBoolean()
   isInSale: boolean
