@@ -55,5 +55,5 @@ export class CreatePlantDTO {
 
   @IsArray()
   @IsNotEmpty()
-  plantTypesIds: number[]
+  plantTypeId: number[]
 }

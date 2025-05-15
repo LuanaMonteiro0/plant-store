@@ -118,6 +118,7 @@ CREATE TABLE plant_type_plant(
     ON DELETE CASCADE
 );
 
-
+ALTER TABLE plant
+  ALTER COLUMN img_url TYPE TEXT;
 
 

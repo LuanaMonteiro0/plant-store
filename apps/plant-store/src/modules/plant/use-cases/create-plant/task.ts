@@ -15,16 +15,24 @@ export async function createPlant(
 
     const plantTypeQuery = `SELECT COUNT(*)::int FROM plant_type WHERE id = ANY ($plantTypesIds)`
 
+    console.log(plantTypeQuery)
+
     const plantTypesQueryValues = {
-      plantTypesIds: params.plantTypesIds,
+      plantTypesIds: params.plantTypeId,
     }
+
+    console.log(plantTypesQueryValues)
 
     const result = await client.query<{ count: number }>({
       query: plantTypeQuery,
       values: plantTypesQueryValues,
     })
 
-    const allExist = result[0].count === params.plantTypesIds.length
+  
+
+    const allExist = result[0].count === params.plantTypeId.length
+
+    console.log(allExist)
 
     if (!allExist) {
       throw new Error('Not all types present in DB')
@@ -32,6 +40,8 @@ export async function createPlant(
 
     const plantCategoryQuery =
       'SELECT id FROM plant_category WHERE id = $plantCategoryId'
+
+    console.log(plantCategoryQuery)
 
     const plantCategoryQueryValues = {
       plantCategoryId: params.plantCategoryId,
@@ -43,6 +53,8 @@ export async function createPlant(
     })
 
     const plantCategory = firstResponse[0]
+
+    console.log(plantCategory)
 
     if (!plantCategory) {
       throw new Error('Plant Category does not exist.')
@@ -88,13 +100,16 @@ export async function createPlant(
       plantCategoryId: params.plantCategoryId,
     }
 
+    console.log(insertionQuery)
+    console.log(insertionQueryValues)
+
     const response = await client.query<Plant>({
       query: insertionQuery,
       values: insertionQueryValues,
     })
     const plant = response[0]
 
-    for (const plantTypeId of params.plantTypesIds) {
+    for (const plantTypeId of params.plantTypeId) {
       const plantTypePlantQuery =
         'INSERT INTO plant_type_plant(plant_id, plant_type_id) VALUES($plantId, $plantTypeId)'
 
