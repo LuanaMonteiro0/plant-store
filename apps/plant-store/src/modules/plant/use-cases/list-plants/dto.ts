@@ -1,5 +1,5 @@
 export class ListPlantsDTO {
-  plantLabel: string
-  plantCategory: string
-  plantType: string
+  plantLabel?: string
+  plantCategory?: string
+  plantType?: string
 }

@@ -1,22 +1,23 @@
 import { TunnelCatFactory } from '@core/tunnelCat/tunnel-cat.factory'
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common'
 
-import { listPlants } from './use-cases/list-plants'
+import { listPlants, ListPlantsDTO } from './use-cases/list-plants'
 import { createPlant, CreatePlantDTO } from './use-cases/create-plant'
 import { getPlant, GetPlantDTO } from './use-cases/get-plant'
 import { updatePlant, UpdatePlantDTO } from './use-cases/update-plant'
 import { deletePlant, DeletePlantDTO } from './use-cases/delete-plant'
+
 
 @Controller('/plants')
 export class PlantController {
   constructor(private readonly tunnelCat: TunnelCatFactory) {}
 
   @Get('/')
-  async listPlants() {
+  async listPlants(@Query() params: ListPlantsDTO) {
     const client = await this.tunnelCat.connect()
 
     try {
-      const response = await listPlants(client)
+      const response = await listPlants(client,{...params})
 
       return response
     } catch (err) {
