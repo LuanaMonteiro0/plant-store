@@ -1,9 +1,10 @@
-import { Controller } from '@nestjs/common'
+import { Body, Controller, Get, Param, Post } from '@nestjs/common'
 
 import { TunnelCatFactory } from '@core/tunnelCat/tunnel-cat.factory'
 
 import { listUserPlants } from './use-cases/list-user-plants'
 import { createUser, CreateUserDTO } from './use-cases/create-user'
+import { loginUser, LoginUserDTO } from './use-cases/login'
 
 @Controller('/user' )
 export class UserController {
@@ -38,4 +39,19 @@ export class UserController {
        await client.release() 
      }
    }
+
+
+   @Post('/login')
+  async loginUser(@Body() body: LoginUserDTO) {
+    const client = await this.tunnelCat.connect()
+    try {
+      const user = await loginUser(client, { ...body })
+      if (!user) {
+        return { message: 'Invalid credentials' }
+      }
+      return user
+    } finally {
+      await client.release()
+    }
+  }
 }
