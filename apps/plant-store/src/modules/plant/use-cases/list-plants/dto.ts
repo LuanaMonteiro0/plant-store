@@ -1,4 +1,4 @@
-export class ListUserPlantsDTO {
+export class ListPlantsDTO {
   plantLabel?: string
   plantCategory?: string
   plantType?: string
